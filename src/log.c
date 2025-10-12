@@ -130,7 +130,7 @@ void nofrendo_log_chain_logfunc(int (*func)(const char *string))
    log_func = func;
 }
 
-void nofrendo_log_assert(int expr, int line, const char *file, char *msg)
+void nofrendo_log_assert(int expr, int line, const char *file, const char *msg)
 {
    if (expr)
       return;

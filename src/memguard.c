@@ -40,7 +40,7 @@ typedef struct memblock_s
 {
    void *block_addr;
    int block_size;
-   char *file_name;
+   const char *file_name;
    int line_num;
 } memblock_t;
 
@@ -65,7 +65,8 @@ static memblock_t *mem_record = NULL;
 */
 static int mem_checkguardblock(void *data, int guard_size)
 {
-   char *check, *block;
+   const char *check;
+   char *block;
    int i, alloc_size;
 
    /* get the original pointer */
@@ -115,7 +116,8 @@ static void mem_freeguardblock(void *data, int guard_size)
 static void *mem_guardalloc(int alloc_size, int guard_size)
 {
    void *orig;
-   char *block, *check;
+   char *block;
+   const char *check;
    uint32 *ptr;
    int i;
 
@@ -193,7 +195,7 @@ static void mem_init(void)
 }
 
 /* add a block of memory to the master record */
-static void mem_addblock(void *data, int block_size, char *file, int line)
+static void mem_addblock(void *data, int block_size, const char *file, int line)
 {
    int i;
 
@@ -213,7 +215,7 @@ static void mem_addblock(void *data, int block_size, char *file, int line)
 }
 
 /* find an entry in the block record and delete it */
-static void mem_deleteblock(void *data, char *file, int line)
+static void mem_deleteblock(void *data, const char *file, int line)
 {
    int i;
    char fail[256];
@@ -244,7 +246,7 @@ static void mem_deleteblock(void *data, char *file, int line)
 #ifdef NOFRENDO_DEBUG
 
 /* allocates memory and clears it */
-void *_my_malloc(int size, char *file, int line)
+void *_my_malloc(int size, const char *file, int line)
 {
    void *temp;
    char fail[256];
@@ -275,7 +277,7 @@ void *_my_malloc(int size, char *file, int line)
 }
 
 /* free a pointer allocated with my_malloc */
-void _my_free(void **data, char *file, int line)
+void _my_free(void **data, const char *file, int line)
 {
    char fail[256];
 
@@ -307,7 +309,7 @@ void _my_free(void **data, char *file, int line)
    *data = NULL; /* NULL our source */
 }
 
-char *_my_strdup(const char *string, char *file, int line)
+char *_my_strdup(const char *string, const char *file, int line)
 {
    char *temp;
 

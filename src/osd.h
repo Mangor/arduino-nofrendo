@@ -92,7 +92,7 @@ extern void osd_getmouse(int *x, int *y, int *button);
 
 /* filename manipulation */
 extern void osd_fullname(char *fullname, const char *shortname);
-extern char *osd_newextension(char *string, char *ext);
+extern char *osd_newextension(char *string, const char *ext);
 
 /* build a filename for a snapshot, return -ve for error */
 extern int osd_makesnapname(char *filename, int len);

@@ -36,9 +36,9 @@
 #define NOFRENDO_FREE(d) _my_free((void **)&(d), __FILE__, __LINE__)
 #define NOFRENDO_STRDUP(s) _my_strdup((s), __FILE__, __LINE__)
 
-extern void *_my_malloc(int size, char *file, int line);
-extern void _my_free(void **data, char *file, int line);
-extern char *_my_strdup(const char *string, char *file, int line);
+extern void *_my_malloc(int size, const char *file, int line);
+extern void _my_free(void **data, const char *file, int line);
+extern char *_my_strdup(const char *string, const char *file, int line);
 
 #else /* !NOFRENDO_DEBUG */
 
@@ -53,6 +53,7 @@ extern char *_my_strdup(const char *string);
 
 #endif /* !NOFRENDO_DEBUG */
 
+extern void *mem_alloc(int size, bool prefer_fast_memory);
 extern void mem_cleanup(void);
 extern void mem_checkblocks(void);
 extern void mem_checkleaks(void);
